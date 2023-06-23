@@ -9,16 +9,14 @@ var isValid=require("date-fns/isValid");
 app.use(express.json());
 const dbPath=path.join(__dirname,todoApplication.db);
 let db=null;
+
 const initializeDAndServer=async()=>{
     try{
-        db=await open({
-         filename:dbPath,
-         driver:sqlite3.Database,
-        });
+        db=await open({filename:dbPath,driver:sqlite3.Database});
         app.listen(3000,()=>{
             console.log("Server Running at http://localhost:3000/");
         });
-    }.catch(error){
+    } catch(error){
         console.log(`DB Error:${error.message}`);
         process.exit(1);
    }
